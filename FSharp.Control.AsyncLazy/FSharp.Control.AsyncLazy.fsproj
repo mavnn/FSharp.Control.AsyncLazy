@@ -9,10 +9,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FSharp.Control.AsyncLazy</RootNamespace>
     <AssemblyName>FSharp.Control.AsyncLazy</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Name>FSharp.Control.AsyncLazy</Name>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="AsyncLazy.fs" />
     <None Include="Script.fsx" />
+    <None Include="paket.template" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
