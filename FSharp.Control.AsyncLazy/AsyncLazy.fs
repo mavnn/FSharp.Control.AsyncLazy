@@ -39,3 +39,13 @@ type AsyncLazy<'a> (creator : Async<'a>) =
 module AsyncLazy =
     let Create creator = AsyncLazy(creator)
     let CreateFromValue value = AsyncLazy(async { return value })
+    let Parallel (lazies : #seq<AsyncLazy<_>>) =
+        lazies
+        |> Seq.map (fun l -> l.Force())
+        |> Async.Parallel
+        |> Create
+    let map f (l : AsyncLazy<_>) =
+        async {
+            let! r = l.Force()
+            return f r
+        } |> Create
