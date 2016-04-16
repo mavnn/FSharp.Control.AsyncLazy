@@ -55,3 +55,14 @@ let ``Parallel method should throw if any force fails`` () =
         (AsyncLazy(async {failwith "boo"; return 10}))::l
         |> AsyncLazy.Parallel
     run (l'.Force() |> Async.Ignore)
+
+[<Test>]
+let ``Calling start multiple times concurrently only runs creator once`` () =
+    let count = ref 0
+    let it = AsyncLazy(async { count := !count + 1; return 10 })
+    [ for _ in [0..10] -> async { it.Start() } ]
+    |> Async.Parallel
+    |> run
+    |> ignore
+    Async.RunSynchronously (it.Force() |> Async.Ignore)
+    Assert.AreEqual(1, !count)
